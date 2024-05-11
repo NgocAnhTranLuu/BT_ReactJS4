@@ -1,10 +1,11 @@
 
 import './App.css';
+import MovieMain from './Movie/MovieMain';
 
 function App() {
   return (
     <div>
-      hello
+      <MovieMain/>
     </div>
   );
 }

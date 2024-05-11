@@ -1,0 +1,91 @@
+.header{
+    background: url(../public/img/banner.jpeg) no-repeat center;
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
+}
+
+/* button{
+    background-color: none;
+} */
+h4{
+    color: goldenrod;
+}
+
+.nen{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-bottom: 150px;
+
+}
+
+.soDoGhe h4{
+    text-align: center;
+}
+.soDoGhe_chuThich {
+    justify-content: center;
+}
+
+.seat{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid white;
+    cursor: pointer;
+    text-align: center;
+    /* display: inline; */
+    margin: 10px;
+}
+
+.seatL1{
+    background-color:black;
+}
+.seatL2{
+    background-color: rgb(96, 96, 96);
+}
+.seatL3{
+    background-color: rgb(186, 186, 186);
+}
+.seatSelect{
+    background-color: goldenrod;
+}
+.seatReser{
+    background-color: red;
+}
+
+.soDoGhe_SD_ghe button{
+    color: white;
+    text-align: center;
+    font-size: 0.8rem;
+}
+.docHL{
+    margin-right: 40px;
+}
+.ngangHL{
+    margin-top: 60px;
+}
+
+.textDatGhe thead{
+    color: gray;
+}
+.textDatGhe tbody{
+    color: white;
+}
+
+
+.soDoGhe_SD{
+    text-align: center;
+}
+.soDoGhe_SD_man{
+    width: 80%;
+    margin: auto;
+    height: 15px;
+    background-color: gray;
+    border-radius: 10px 10px 0 0;
+}
+
+.soDoGhe_SD p{
+    width: 70%;
+    margin: auto;
+    padding: 10px 0;
+    background-image: linear-gradient(to bottom, rgba(119, 119, 119, 0.4), rgba(0, 0, 0, 0.1))
+}
