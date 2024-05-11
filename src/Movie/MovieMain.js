@@ -4,9 +4,12 @@ import MovieName from './MovieName'
 import MovieItem from './MovieItem'
 import MovieSoDo from './MovieSoDo'
 
+import { connect } from 'react-redux'
 
 
-export default class MovieMain extends Component {
+
+class MovieMain extends Component {
+
     arrMovie = [
         { "stt": 1, "maGhe": "A1", "gia": 50000, "loaiGhe": "Loai3", "daDat": false },
         { "stt": 2, "maGhe": "A2", "gia": 50000, "loaiGhe": "Loai3", "daDat": false },
@@ -150,19 +153,37 @@ export default class MovieMain extends Component {
 
         let danhSachGheUpDate = this.state.danhSachGhe
 
-        let index = danhSachGheUpDate.findIndex(gheDD => gheDD.maGhe == gheItem.maGhe)
-        // console.log(index)
-        if (index != -1) {
-            danhSachGheUpDate.splice(index, 1);
-        } else {
-            danhSachGheUpDate.push(gheItem)
-        }
 
-        let newState = {
-            danhSachGhe: danhSachGheUpDate
+        let nameKHMain = this.props.ttKH.nameKH
+        let soGheKHMain = this.props.ttKH.soGheKH
+
+        if (typeof nameKHMain == "string" && nameKHMain.length > 0 && typeof soGheKHMain == "string" && soGheKHMain.length > 0) {
+            let index = danhSachGheUpDate.findIndex(gheDD => gheDD.maGhe == gheItem.maGhe)
+            // console.log(index)
+
+            if (index != -1) {
+                danhSachGheUpDate.splice(index, 1);
+            } else {
+                danhSachGheUpDate.push(gheItem)
+            }
+            let newState = {
+                danhSachGhe: danhSachGheUpDate
+            }
+            this.setState(newState)
+
+        } else {
+            alert("Điền Tên và Số lượng ghế để đặt chỗ")
         }
-        this.setState(newState)
     }
+
+    tenGheKHDangKy = () => {
+        let nameKHMain = this.props.ttKH.nameKH
+        let soGheKHMain = this.props.ttKH.soGheKH
+        let tenGheKHDK = { nameKHMain: nameKHMain, soGheKHMain: soGheKHMain }
+        return tenGheKHDK
+
+    }
+
 
     maGheTotal = () => {
         let tongMaGhe = this.state.danhSachGhe.reduce((maghe, item) => {
@@ -170,6 +191,20 @@ export default class MovieMain extends Component {
         }, [])
         //   console.log(tongMaGhe)
         return tongMaGhe
+    }
+    soLuongGheTotal = () => {
+        let soGheKHMain = this.props.ttKH.soGheKH
+
+        let tongSLGhe = this.state.danhSachGhe.reduce((sl, item) => {
+            return sl + item.soLuong
+        }, 0)
+        if (tongSLGhe > soGheKHMain) {
+            alert ("Số lượng ghế của bạn đã quá giới hạn. Bạn vẫn được lưu ghế này nhưng chú ý số lượng ghế.")
+        } else {
+
+        }
+        //   console.log(tongSLGhe)
+        return tongSLGhe
     }
 
     sumTotal = () => {
@@ -191,9 +226,9 @@ export default class MovieMain extends Component {
                             <MovieSoDo state={this.state} arrMovie={this.arrMovie} danhSachGheDangDat={this.danhSachGheDangDat} />
                         </div>
                         <div className='col-4 box'>
-                            <MovieName/>
+                            <MovieName />
 
-                            <MovieItem maGheTotal={this.maGheTotal} sumTotal={this.sumTotal} />
+                            <MovieItem tenGheKHDangKy={this.tenGheKHDangKy} soLuongGheTotal={this.soLuongGheTotal} maGheTotal={this.maGheTotal} sumTotal={this.sumTotal} />
                         </div>
                     </div>
                 </div>
@@ -203,3 +238,11 @@ export default class MovieMain extends Component {
 }
 
 
+const mapStateToProp = (rootReducer) => {
+    return {
+        ttKH: rootReducer.thongTinKhachHang
+    }
+}
+
+export default connect(mapStateToProp)(MovieMain)
+// export default MovieMain

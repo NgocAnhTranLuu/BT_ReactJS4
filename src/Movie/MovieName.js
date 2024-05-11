@@ -1,13 +1,15 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 
-function MovieName() {
+
+function MovieName(props) {
 
     const [name, setName] = useState('')
     const [soGhe, setSoGhe] = useState('')
 
-    const handleSubmitBtn = (event) => {
-        console.log(name, soGhe)
-    }
+    // const handleSubmitBtn = (event) => {
+    //     console.log(name, soGhe)
+    // }
 
 
     return (
@@ -31,7 +33,15 @@ function MovieName() {
                     <span></span>
                 </div>
 
-                <button type='button' className="btn btn-danger" onClick={handleSubmitBtn}>BẮT ĐẦU LỰA CHỌN</button>
+                <button type='button' className="btn btn-danger" onClick={() => {
+                    const action = {
+                        type: "THONG_TIN_KH",
+                        nameKH: name,
+                        soGheKH: soGhe,
+                    }
+                    props.dispatch(action)
+                }
+                }>BẮT ĐẦU LỰA CHỌN</button>
             </form>
 
         </div>
@@ -39,4 +49,4 @@ function MovieName() {
 
 }
 
-export default MovieName;
+export default connect()(MovieName)

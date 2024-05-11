@@ -1,29 +1,17 @@
 import React, { Component } from 'react'
-
-export default class MovieItem extends Component {
-
-    // renderGheDangDat = () => {
-    //     return this.props.danhSachGhe.map((gheItemGH) => {
-    //         let { maGhe, gia, soLuong } = gheItemGH
-    //         return <tr key={maGhe}>
-    //             <td>Mark</td>
-    //             <td>5 ghế</td>
-    //             <td>{maGhe}</td>
-    //             <td>{gia.toLocaleString()} VNĐ</td>
-    //         </tr>
-    //     })
-    // }
+import { connect } from 'react-redux'
 
 
-
+class MovieItem extends Component {
 
     render() {
-        let {sumTotal, maGheTotal} = this.props
+        let { sumTotal, maGheTotal, soLuongGheTotal, tenGheKHDangKy } = this.props
+        let { nameKHMain, soGheKHMain } = tenGheKHDangKy()
         return (
             <div className='textDatGhe mt-5'>
                 <h4>Bắt đầu đặt ghế của bạn</h4>
                 <table className="table">
-                    <thead>
+                    {/* <thead>
                         <tr>
                             <th scope="col">Họ và tên</th>
                             <th scope="col">Số lượng ghế</th>
@@ -31,12 +19,26 @@ export default class MovieItem extends Component {
                             <th scope="col">Giá tiền</th>
 
                         </tr>
-                    </thead>
+                    </thead> */}
                     <tbody>
                         <tr>
-                            <td>Mark</td>
-                            <td>5 ghế</td>
+                            <th scope="row">Họ và tên</th>
+                            <td>{nameKHMain}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">SL ghế đã chọn</th>
+                            <td>{soGheKHMain}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">SL ghế</th>
+                            <td>{soLuongGheTotal()}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Mã ghế</th>
                             <td>{maGheTotal()}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Thành tiền</th>
                             <td>{sumTotal()}</td>
                         </tr>
                     </tbody>
@@ -47,3 +49,13 @@ export default class MovieItem extends Component {
         )
     }
 }
+
+
+// const mapStateToProp = (rootReducer) => {
+//     return {
+//         ttKH2: rootReducer.thongTinKhachHang
+//     }
+// }
+
+// export default connect(mapStateToProp)(MovieItem)
+export default MovieItem
